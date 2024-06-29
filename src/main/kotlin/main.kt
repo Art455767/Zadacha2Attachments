@@ -1,74 +1,72 @@
 fun main() {
     val attachments = listOf(
-        PhotoAttachment(1, 1, "https://vk.com/some_photo_link", "https://vk.com/another_photo_link"),
-        VideoAttachment(1, 1, "A Funny Video", 30)
+        Photo(1, 1, "https://vk.com/some_photo_link", "https://vk.com/another_photo_link"),
+        Video(1, 1, "A Funny Video", 30)
     )
 
     val post = Post(1, 1, 1, null, 1234567890, "Hello, world!", Likes(), Comments(), Reposts(), Views(), attachments.toTypedArray())
     println(post)
 }
 
+
 interface Attachment {
     val type: String
 }
 
-abstract class MediaAttachment(override val type: String) : Attachment {
+
+abstract class PhotoAttachment(override val type: String) : Attachment {
     abstract val id: Int
     abstract val ownerId: Int
 }
 
-class PhotoAttachment(
+
+class Photo(
     override val id: Int,
     override val ownerId: Int,
     val photo130: String,
     val photo604: String
-) : MediaAttachment("photo")
+) : PhotoAttachment("photo")
 
-class VideoAttachment(
+
+class Video(
     override val id: Int,
     override val ownerId: Int,
     val title: String,
     val duration: Int
-) : MediaAttachment("video")
+) : PhotoAttachment("video")
 
-class AudioAttachment(
+
+class Audio(
     override val id: Int,
     override val ownerId: Int,
     val artist: String,
     val title: String,
     val duration: Int
-) : MediaAttachment("audio")
+) : PhotoAttachment("audio")
 
-class DocumentAttachment(
+
+class Document(
     override val id: Int,
     override val ownerId: Int,
     val title: String,
     val size: Int,
     val ext: String
-) : MediaAttachment("doc")
-
-class LinkAttachment(
-    val url: String,
-    val title: String,
-    val description: String
-) : Attachment {
-    override val type: String = "link"
-}
+) : PhotoAttachment("doc")
 
 class Likes {
-    // Implementation details of Likes class
+
 }
 
 class Comments {
-    // Implementation details of Comments class
+
 }
 
 class Reposts {
-    // Implementation details of Reposts class
+
 }
 
 class Views {
-    // Implementation details of Views class
+
 }
 
 class Post(
